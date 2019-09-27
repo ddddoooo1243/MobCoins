@@ -27,11 +27,11 @@ public class MainGUI extends GUI implements Listener {
         this.items.clear();
         for (int i = 0; i < this.inventory.getSize(); ++i) {
             if (i == 4) {
-                this.inventory.setItem(i, InventoryUtils.makeItem(Material.DOUBLE_PLANT, 1, 0, StringUtils.color("&b&lYou Have " + MobCoins.getUsers().getUser(this.user).getCoins() + " MobCoins!")));
+                this.inventory.setItem(i, InventoryUtils.makeItem(Material.DOUBLE_PLANT, 1, 0, StringUtils.color("&c&lYou Have " + MobCoins.getUsers().getUser(this.user).getCoins() + " MobCoins!")));
             } else if (i == this.inventory.getSize() - 5) {
-                final List<String> lore = new ArrayList<>(Arrays.asList("&bMob Coins &7can be earnd by killing &b&lHOSTILE &7mobs.", "&bMob Coins &7will allow you to buy items from the Mob Coins menu.", "", "&b&lAvailable Hostile Mobs:"));
+                final List<String> lore = new ArrayList<>(Arrays.asList("&cMob Coins &7can be earnd by killing &c&lHOSTILE &7mobs.", "&cMob Coins &7will allow you to buy items from the Mob Coins menu.", "", "&c&lAvailable Hostile Mobs:"));
                 for (final String mob : MobCoins.getConfiguration().mobs.keySet()) {
-                    lore.add("&b&l * &7" + Character.toUpperCase(mob.charAt(0)) + mob.toLowerCase().substring(1) + " &8(&7" + MobCoins.getConfiguration().mobs.get(mob) + "%&8)");
+                    lore.add("&c&l * &7" + Character.toUpperCase(mob.charAt(0)) + mob.toLowerCase().substring(1) + " &8(&7" + MobCoins.getConfiguration().mobs.get(mob) + "%&8)");
                 }
                 lore.add("&8&l&m--------------------------------------------");
                 this.inventory.setItem(i, InventoryUtils.makeItem(Material.BOOK, 1, 0, "&8&l&m--------------------------------------------", StringUtils.color(lore)));

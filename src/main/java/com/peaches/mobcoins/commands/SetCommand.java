@@ -2,6 +2,7 @@ package com.peaches.mobcoins.commands;
 
 import java.util.*;
 
+import com.peaches.baseplugin.StringUtils;
 import com.peaches.baseplugin.commands.Command;
 import org.bukkit.command.*;
 import org.bukkit.*;
@@ -16,16 +17,16 @@ public class SetCommand extends Command {
     @Override
     public void execute(final CommandSender cs, final String[] args) {
         if (args.length == 3) {
-            final Player p = Bukkit.getPlayer(args[1]);
+            final OfflinePlayer p = Bukkit.getOfflinePlayer(args[1]);
             if (p != null) {
                 final User user = MobCoins.getUsers().getUser(p);
                 try {
                     user.setCoins(Integer.parseInt(args[2]));
                 } catch (NumberFormatException e) {
-                    cs.sendMessage("Thats not a number");
+                    cs.sendMessage(StringUtils.color(MobCoins.getMessages().notANumber.replace("{prefix}", MobCoins.getMessages().prefix)));
                 }
             } else {
-                cs.sendMessage("That player doesnt exist");
+                cs.sendMessage(StringUtils.color(MobCoins.getMessages().notaPlayer.replace("{prefix}", MobCoins.getMessages().prefix)));
             }
         } else {
             cs.sendMessage("/mobcoins set <Player> <Amount>");

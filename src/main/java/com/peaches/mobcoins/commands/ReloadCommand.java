@@ -1,7 +1,9 @@
 package com.peaches.mobcoins.commands;
 
 import com.peaches.baseplugin.BasePlugin;
+import com.peaches.baseplugin.StringUtils;
 import com.peaches.baseplugin.commands.Command;
+import com.peaches.mobcoins.MobCoins;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -14,8 +16,9 @@ public class ReloadCommand extends Command {
     }
 
     @Override
-    public void execute(final CommandSender commandSender, final String[] strings) {
+    public void execute(final CommandSender cs, final String[] strings) {
         BasePlugin.getInstance().loadConfigs();
+        cs.sendMessage(StringUtils.color(MobCoins.getMessages().pluginReloaded.replace("{prefix}", MobCoins.getMessages().prefix)));
     }
 
     @Override

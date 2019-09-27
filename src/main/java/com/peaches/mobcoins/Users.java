@@ -1,10 +1,10 @@
 package com.peaches.mobcoins;
 
 import java.util.*;
-import org.bukkit.entity.*;
 
-public class Users
-{
+import org.bukkit.OfflinePlayer;
+
+public class Users {
     public HashMap<String, User> users;
 
     public Users() {
@@ -18,7 +18,7 @@ public class Users
         return new User(player);
     }
 
-    public User getUser(final Player player) {
+    public User getUser(final OfflinePlayer player) {
         return this.getUser(player.getUniqueId().toString());
     }
 }

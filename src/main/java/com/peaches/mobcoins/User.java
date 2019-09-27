@@ -33,7 +33,7 @@ public class User
     }
 
     public void init() {
-        this.mainGUI = new MainGUI(54, "&b&lMobCoins", this);
+        this.mainGUI = new MainGUI(54, "&c&lMobCoins", this);
         BasePlugin.getInstance().registerListeners(this.mainGUI);
     }
 

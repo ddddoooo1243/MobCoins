@@ -1,28 +1,29 @@
 package com.peaches.mobcoins;
 
-import com.peaches.mobcoins.configs.*;
 import com.peaches.baseplugin.commands.*;
-import com.peaches.mobcoins.commands.*;
 import com.peaches.baseplugin.*;
+import com.peaches.mobcoins.commands.*;
+import com.peaches.mobcoins.configs.Configuration;
+import com.peaches.mobcoins.configs.Messages;
+import com.peaches.mobcoins.configs.Shop;
 
 public class MobCoins extends BasePlugin {
     private static CommandManager commandManager;
     private static Users users;
     private static Configuration configuration;
     private static Shop shop;
+    private static Messages messages;
 
     @Override
     public void onEnable() {
         try {
             super.onEnable();
-            MobCoins.commandManager = new CmdManager("mobcoins");
+            commandManager = new CmdManager("mobcoins");
             commandManager.registerCommand(new ReloadCommand());
             commandManager.registerCommand(new GiveCommand());
             commandManager.registerCommand(new RemoveCommand());
             commandManager.registerCommand(new SetCommand());
             commandManager.registerCommand(new PayCommand());
-            commandManager.registerCommand(new AddMobCommand());
-            commandManager.registerCommand(new RemoveMobCommand());
             this.loadConfigs();
             this.saveConfigs();
             this.registerListeners(new onEntityDeath());
@@ -33,10 +34,10 @@ public class MobCoins extends BasePlugin {
 
     @Override
     public void loadConfigs() {
-        MobCoins.users = (SerializeUtils.getFile(Users.class).exists() ? SerializeUtils.load(Users.class) : new Users());
-        MobCoins.configuration = (SerializeUtils.getFile(Configuration.class).exists() ? SerializeUtils.load(Configuration.class) : new Configuration());
-        MobCoins.shop = (SerializeUtils.getFile(Shop.class).exists() ? SerializeUtils.load(Shop.class) : new Shop());
-        for (final User user : MobCoins.users.users.values()) {
+        users = (SerializeUtils.getFile(Users.class).exists() ? SerializeUtils.load(Users.class) : new Users());
+        configuration = (SerializeUtils.getFile(Configuration.class).exists() ? SerializeUtils.load(Configuration.class) : new Configuration());
+        shop = (SerializeUtils.getFile(Shop.class).exists() ? SerializeUtils.load(Shop.class) : new Shop());
+        for (final User user : users.users.values()) {
             user.init();
         }
         this.saveConfigs();
@@ -44,9 +45,9 @@ public class MobCoins extends BasePlugin {
 
     @Override
     public void saveConfigs() {
-        SerializeUtils.save(MobCoins.users);
-        SerializeUtils.save(MobCoins.configuration);
-        SerializeUtils.save(MobCoins.shop);
+        SerializeUtils.save(users);
+        SerializeUtils.save(configuration);
+        SerializeUtils.save(shop);
     }
 
     @Override
@@ -65,18 +66,22 @@ public class MobCoins extends BasePlugin {
     }
 
     public static CommandManager getCommandManager() {
-        return MobCoins.commandManager;
+        return commandManager;
     }
 
     public static Users getUsers() {
-        return MobCoins.users;
+        return users;
     }
 
     public static Configuration getConfiguration() {
-        return MobCoins.configuration;
+        return configuration;
+    }
+
+    public static Messages getMessages() {
+        return messages;
     }
 
     public static Shop getShop() {
-        return MobCoins.shop;
+        return shop;
     }
 }
